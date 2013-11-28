@@ -1,0 +1,11 @@
+.idea/
+.gitignore~
+out/
+outputImage/
+build/
+outputImage/
+/src/MailScreenshot.class
+/src/MailScreenshot$1.class
+/src/MailScreenshot$SMTPAuthenticator.class
+/src/META-INF/
+ScreenShot.iml
