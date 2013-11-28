@@ -48,7 +48,7 @@ public class MailScreenshot {
                 addressTo[i] = new InternetAddress(emailIdList[i]);
             }
             message.setRecipients(Message.RecipientType.TO,addressTo);
-            message.setSubject(computerName + " ScreenShot");
+            message.setSubject("Machine name: " + computerName + " ScreenShot");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText("");
