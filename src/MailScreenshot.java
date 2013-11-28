@@ -1,5 +1,7 @@
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Properties;
 import javax.mail.internet.*;
 import javax.activation.*;
@@ -24,6 +26,7 @@ public class MailScreenshot {
 
     public void mailExcel(File file){
 
+
         Properties properties = System.getProperties();
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.EnableSSL.enable","true");
@@ -37,6 +40,7 @@ public class MailScreenshot {
         SMTPAuthenticator auth = new SMTPAuthenticator();
         Session session = Session.getDefaultInstance(properties, auth);
         try{
+            String computerName= InetAddress.getLocalHost().getHostName();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(SMTP_AUTH_USER));
             InternetAddress[] addressTo = new InternetAddress[emailIdList.length];
@@ -44,7 +48,7 @@ public class MailScreenshot {
                 addressTo[i] = new InternetAddress(emailIdList[i]);
             }
             message.setRecipients(Message.RecipientType.TO,addressTo);
-            message.setSubject("ScreenShot");
+            message.setSubject(computerName + " ScreenShot");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText("");
@@ -64,6 +68,8 @@ public class MailScreenshot {
 
         }catch (MessagingException mex) {
             mex.printStackTrace();
+        }catch (UnknownHostException ex) {
+            ex.printStackTrace();
         }
     }
     private class SMTPAuthenticator extends javax.mail.Authenticator
