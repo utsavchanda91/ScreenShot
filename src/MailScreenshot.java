@@ -22,9 +22,17 @@ public class MailScreenshot {
     public static final String SMTP_AUTH_USER = "healthkarttest@gmail.com";
     public static final char[] SMTP_AUTH_PWD  = new char[]{'h','e','a','l','t','h','k','a','r','t'};
     public static final String emailToAddress = "utsav.chanda@healthkart.com";
-    public static String[] emailIdList = {"utsav.chanda@healthkart.com","nitin.wadhawan@healthkart.com","rahul.agarwal@healthkart.com"};
+    public static String[] emailIdList = {"utsav.chanda@healthkart.com"/*,"nitin.wadhawan@healthkart.com","rahul.agarwal@healthkart.com"*/};
 
-    public void mailExcel(File file){
+    private static void addAttachment(MimeMultipart mimeMultipart,File file,BodyPart messageBodyPart) throws MessagingException {
+        DataSource source = new FileDataSource(file);
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(file.getName());
+        mimeMultipart.addBodyPart(messageBodyPart);
+
+    }
+
+    public void mailExcel(File file1, File file2){
 
 
         Properties properties = System.getProperties();
@@ -36,7 +44,7 @@ public class MailScreenshot {
         properties.setProperty("mail.password", new String(SMTP_AUTH_PWD));
         properties.setProperty("mail.smtp.port", SMTP_HOST_PORT);
         properties.put("mail.smtp.starttls.enable", "true");
-        //properties.setProperty("mail.transport.protocol", "smtp");
+
         SMTPAuthenticator auth = new SMTPAuthenticator();
         Session session = Session.getDefaultInstance(properties, auth);
         try{
@@ -55,10 +63,15 @@ public class MailScreenshot {
             MimeMultipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
             messageBodyPart = new MimeBodyPart();
-            DataSource source = new FileDataSource(file);
+
+            addAttachment(multipart, file1, messageBodyPart);
+            messageBodyPart = new MimeBodyPart();
+            addAttachment(multipart, file2, messageBodyPart);
+
+            /*DataSource source = new FileDataSource(file);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(file.getName());
-            multipart.addBodyPart(messageBodyPart);
+            multipart.addBodyPart(messageBodyPart);*/
             message.setContent(multipart);
             Transport transport = session.getTransport("smtp");
             transport.connect(SMTP_HOST_NAME, SMTP_AUTH_USER, new String(SMTP_AUTH_PWD));
