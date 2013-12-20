@@ -1,20 +1,25 @@
 <project basedir=".">
     <path id = "compile.classpath">
-        <fileset dir="${basedir}" >
-
-           <include name="java-mail-1.4.jar"/>
-            <include name="selenium-java-2.37.0.jar"/>
-            <include name="selenium-java-2.37.0-srcs.jar"/>
-            <include name="selenium-server-standalone-2.37.0.jar"/>
-        </fileset>
+        <fileset dir="${basedir}" includes="*.jar"/>
+        <!--<include name="java-mail-1.4.jar"/>
+         <include name="selenium-java-2.37.0.jar"/>
+         <include name="selenium-java-2.37.0-srcs.jar"/>
+         <include name="selenium-server-standalone-2.37.0.jar"/>
+     </fileset>-->
     </path>
     <target name="clean">
         <delete dir="${basedir}/build"/>
     </target>
 
-    <target name="compile" depends="clean">
+    <target name="init" depends="clean">
         <mkdir dir="${basedir}/build/classes"/>
-        <javac srcdir="${basedir}/src" debug="true" destdir="${basedir}/build/classes" verbose="false">
+        <mkdir dir="${basedir}/build/jar"/>
+        <mkdir dir="${basedir}/build/jar/outputImage"/>
+        <copy file="${basedir}/exe/chromedriver" todir="${basedir}/build/jar/"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${basedir}/src" destdir="${basedir}/build/classes" verbose="false">
             <classpath refid="compile.classpath"/>
         </javac>
     </target>
@@ -23,20 +28,16 @@
     </manifestclasspath>
 
     <target name="jar" depends="compile">
-        <mkdir dir="${basedir}/build/jar"/>
-        <copy file="${basedir}/exe/chromedriver" todir="${basedir}/build/jar/"/>
+        <copy file="${basedir}/java-mail-1.4.jar" todir="${basedir}/build/jar/ScreenShot/"/>
+        <copy file="${basedir}/selenium-java-2.37.0-srcs.jar" todir="${basedir}/build/jar/ScreenShot"/>
+        <copy file="${basedir}/selenium-java-2.37.0.jar" todir="${basedir}/build/jar/ScreenShot"/>
+        <copy file="${basedir}/selenium-server-standalone-2.37.0.jar" todir="{basedir}/build/jar/ScreenShot"/>
+
         <jar destfile="${basedir}/build/jar/ScreenShot.jar" basedir="${basedir}/build/classes">
             <manifest>
                 <attribute name="Main-Class" value="ScreenShot"/>
                 <attribute name="Class-Path"  value="${manifest.classpath}"/>
             </manifest>
-
         </jar>
-        <copy todir="${basedir}">
-            <fileset dir="${basedir}">
-                <include name="*.jar"/>
-                <type type="file"/>
-            </fileset>
-        </copy>
     </target>
 </project>

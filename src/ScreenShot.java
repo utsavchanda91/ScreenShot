@@ -32,7 +32,9 @@ public class ScreenShot {
 
 
     public WebDriver openBrowser() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"chromedriver");
+       String chromePath = System.getProperty("user.dir")+"/chromedriver";
+        System.out.println(chromePath);
+        System.setProperty("webdriver.chrome.driver",chromePath);
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
@@ -48,7 +50,9 @@ public class ScreenShot {
             String fileName = "/ScreenCapture" + new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
-            File file = new File(System.getProperty("user.dir") + "/outputImage/" + dateFormat.format(date), fileName+".gif");
+            System.out.println(System.getProperty("user.dir"));
+            //String finalFilePath=""
+            File file = new File(System.getProperty("user.dir") + "/outputImage/"/* + dateFormat.format(date)*/, fileName+".gif");
             //File file = new File(System.getProperty("user.dir") + "/outputImage/" + dateFormat.format(date), fileName+".gif");
             /*String destination = "/home/utsav/CodeRepository/ScreenShot/outputImage/";
             File file = new File(destination + "/" + dateFormat.format(date)+fileName+".gif");*/
@@ -64,6 +68,7 @@ public class ScreenShot {
         }catch (AWTException ex){
             ex.printStackTrace();
         }
+        System.out.println("Checking null") ;
         return null;
 
     }
@@ -75,6 +80,7 @@ public class ScreenShot {
 
         WebDriver webDriver = screenShot.openBrowser();
         File file2 = screenShot.printScreen();
+        webDriver.quit();
 
         File file[] = {file1, file2};
 
