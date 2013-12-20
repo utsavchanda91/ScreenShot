@@ -31,7 +31,7 @@
         <copy file="${basedir}/java-mail-1.4.jar" todir="${basedir}/build/jar/ScreenShot/"/>
         <copy file="${basedir}/selenium-java-2.37.0-srcs.jar" todir="${basedir}/build/jar/ScreenShot"/>
         <copy file="${basedir}/selenium-java-2.37.0.jar" todir="${basedir}/build/jar/ScreenShot"/>
-        <copy file="${basedir}/selenium-server-standalone-2.37.0.jar" todir="{basedir}/build/jar/ScreenShot"/>
+        <copy file="${basedir}/selenium-server-standalone-2.37.0.jar" todir="${basedir}/build/jar/ScreenShot"/>
 
         <jar destfile="${basedir}/build/jar/ScreenShot.jar" basedir="${basedir}/build/classes">
             <manifest>

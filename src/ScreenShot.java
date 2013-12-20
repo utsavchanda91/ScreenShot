@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import javax.imageio.ImageIO;
@@ -32,10 +33,10 @@ public class ScreenShot {
 
 
     public WebDriver openBrowser() throws InterruptedException {
-       String chromePath = System.getProperty("user.dir")+"/chromedriver";
+       /*String chromePath = System.getProperty("user.dir")+"/chromedriver";
         System.out.println(chromePath);
-        System.setProperty("webdriver.chrome.driver",chromePath);
-        WebDriver webDriver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver",chromePath);*/
+        WebDriver webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();
         webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
         webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
