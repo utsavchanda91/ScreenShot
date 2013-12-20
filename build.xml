@@ -15,7 +15,7 @@
         <mkdir dir="${basedir}/build/classes"/>
         <mkdir dir="${basedir}/build/jar"/>
         <mkdir dir="${basedir}/build/jar/outputImage"/>
-        <copy file="${basedir}/exe/chromedriver" todir="${basedir}/build/jar/"/>
+        <!--<copy file="${basedir}/exe/chromedriver" todir="${basedir}/build/jar/"/>-->
     </target>
 
     <target name="compile" depends="init">

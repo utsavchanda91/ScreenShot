@@ -51,12 +51,7 @@ public class ScreenShot {
             String fileName = "/ScreenCapture" + new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
-            System.out.println(System.getProperty("user.dir"));
-            //String finalFilePath=""
             File file = new File(System.getProperty("user.dir") + "/outputImage/"/* + dateFormat.format(date)*/, fileName+".gif");
-            //File file = new File(System.getProperty("user.dir") + "/outputImage/" + dateFormat.format(date), fileName+".gif");
-            /*String destination = "/home/utsav/CodeRepository/ScreenShot/outputImage/";
-            File file = new File(destination + "/" + dateFormat.format(date)+fileName+".gif");*/
             file.mkdirs();
 
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
