@@ -22,7 +22,7 @@ public class MailScreenshot {
     public static final String SMTP_AUTH_USER = "healthkarttest@gmail.com";
     public static final char[] SMTP_AUTH_PWD  = new char[]{'h','e','a','l','t','h','k','a','r','t'};
     public static final String emailToAddress = "utsav.chanda@healthkart.com";
-    public static String[] emailIdList = {"utsav.chanda@healthkart.com"/*,"nitin.wadhawan@healthkart.com","rahul.agarwal@healthkart.com"*/};
+    public static String[] emailIdList = {"utsav.chanda@healthkart.com","nitin.wadhawan@healthkart.com","pratham@healthkart.com"};
 
     private static void addAttachment(MimeMultipart mimeMultipart,File file,BodyPart messageBodyPart) throws MessagingException {
         DataSource source = new FileDataSource(file);
@@ -62,9 +62,10 @@ public class MailScreenshot {
             messageBodyPart.setText("");
             MimeMultipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
-            messageBodyPart = new MimeBodyPart();
 
-            addAttachment(multipart, file1, messageBodyPart);
+            /*messageBodyPart = new MimeBodyPart();
+            addAttachment(multipart, file1, messageBodyPart);*/
+
             messageBodyPart = new MimeBodyPart();
             addAttachment(multipart, file2, messageBodyPart);
 

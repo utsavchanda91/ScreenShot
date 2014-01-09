@@ -1,7 +1,10 @@
 /*import com.sun.media.jfxmediaimpl.MediaUtils;*/
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.sun.jna.platform.FileUtils;
 import org.junit.Test;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -32,19 +35,18 @@ import java.util.concurrent.TimeUnit;
 public class ScreenShot {
 
 
-    public WebDriver openBrowser() throws InterruptedException {
-       String chromePath = System.getProperty("user.dir")+"/exe/chromedriver";
-        System.out.println(chromePath);
-        System.setProperty("webdriver.chrome.driver",chromePath);
-        WebDriver webDriver = new ChromeDriver();
+    public File openBrowser() throws InterruptedException {
+
+        WebDriver webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();
-        /*WebDriver webDriver = new FirefoxDriver();
-        webDriver.manage().window().maximize();*/
-        //webDriver.get("http://205.147.110.151/reporting/payment/payment.jsp");
-        webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
+        webDriver.get("http://205.147.110.151/reporting/payment/payment.jsp");
+        //webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
         webDriver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         Thread.sleep(5000);
-        return webDriver;
+        File scrFile = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.FILE);
+
+        webDriver.quit();
+        return scrFile;
     }
 
     public File printScreen(){
@@ -75,11 +77,10 @@ public class ScreenShot {
     public static void main(String []args) throws InterruptedException {
 
         ScreenShot screenShot = new ScreenShot();
-        File file1 = screenShot.printScreen();
 
-        WebDriver webDriver = screenShot.openBrowser();
-        File file2 = screenShot.printScreen();
-        webDriver.quit();
+        File file1 = screenShot.printScreen();
+        File file2 = screenShot.openBrowser();
+
 
         File file[] = {file1, file2};
 
