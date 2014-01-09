@@ -38,9 +38,10 @@ public class ScreenShot {
         System.setProperty("webdriver.chrome.driver",chromePath);*/
         WebDriver webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();
+        //webDriver.get("http://205.147.110.151/reporting/payment/payment.jsp");
         webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
-        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        Thread.sleep(2000);
+        webDriver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        Thread.sleep(5000);
         return webDriver;
     }
 
@@ -51,7 +52,7 @@ public class ScreenShot {
             String fileName = "/ScreenCapture" + new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
-            File file = new File(System.getProperty("user.dir") + "/outputImage/"/* + dateFormat.format(date)*/, fileName+".gif");
+            File file = new File(System.getProperty("user.dir") + "/outputImage/", fileName+".gif");
             file.mkdirs();
 
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
@@ -82,7 +83,7 @@ public class ScreenShot {
 
         MailScreenshot mailScreenshot = new MailScreenshot();
         mailScreenshot.mailExcel(file1,file2);
-        webDriver.quit();
+
 
     }
 }
