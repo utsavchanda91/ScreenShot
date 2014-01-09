@@ -33,11 +33,13 @@ public class ScreenShot {
 
 
     public WebDriver openBrowser() throws InterruptedException {
-       /*String chromePath = System.getProperty("user.dir")+"/chromedriver";
+       String chromePath = System.getProperty("user.dir")+"/exe/chromedriver";
         System.out.println(chromePath);
-        System.setProperty("webdriver.chrome.driver",chromePath);*/
-        WebDriver webDriver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver",chromePath);
+        WebDriver webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
+        /*WebDriver webDriver = new FirefoxDriver();
+        webDriver.manage().window().maximize();*/
         //webDriver.get("http://205.147.110.151/reporting/payment/payment.jsp");
         webDriver.get("http://perf.healthkart.com/view/viewTemplate.jsp ");
         webDriver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
