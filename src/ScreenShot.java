@@ -78,14 +78,14 @@ public class ScreenShot {
 
         ScreenShot screenShot = new ScreenShot();
 
-        File file1 = screenShot.printScreen();
+        //File file1 = screenShot.printScreen();
         File file2 = screenShot.openBrowser();
 
 
-        File file[] = {file1, file2};
+        File file[] = {file2};
 
         MailScreenshot mailScreenshot = new MailScreenshot();
-        mailScreenshot.mailExcel(file1,file2);
+        mailScreenshot.mailExcel(file2);
 
 
     }
